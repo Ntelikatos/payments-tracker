@@ -1,13 +1,209 @@
+/* ############################################################################ */
+/* #############################   Global Styles   ############################ */
+/* ############################################################################ */
+
+* {
+  margin: 0; /* to remove margin from flex items */
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: fit-content;
+}
+
 body {
   margin: 0;
+
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  background-image: url('./resources/background-image.bmp');
+  background-repeat: repeat;
+  background-position: center center;
+  background-attachment: fixed;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* ############################################################################ */
+
+/* ############################################################################ */
+/* ###########################   Components Styles   ########################## */
+/* ############################################################################ */
+
+.payments-container {
+  position: sticky;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 10px;
+
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+
+  margin: 0 auto;
+  padding: 10px;
+  height: 100%;
+  width: fit-content;
+  text-align: left;
+
+  background-color: rgba(127, 174, 225, 0.6);
+  box-shadow: rgba(0, 0, 0, 0.7) 0px 0px 12px 5px;
+}
+
+.payment {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+
+  border: 1px solid black;
+  border-radius: 10px;
+
+  padding: 5px 10px;
+  width: 260px;
+  line-height: 20px;
+  font-size: 13px;
+
+  background-color: rgb(216, 235, 255);
+  box-shadow: rgba(65, 65, 65, 0.7) 0px 0px 4px 0.1px;
+}
+
+.add-payment-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+
+  grid-row: span 2;
+
+  border: 1px solid black;
+  border-radius: 10px;
+
+  padding-bottom: 5px;
+  font-weight: 700;
+  width: 260px;
+
+  background-color: rgb(216, 235, 255);
+  box-shadow: rgba(65, 65, 65, 0.7) 0px 0px 4px 0.1px;
+}
+
+.add-payment-container label {
+  margin: 8px 15px 3px 15px;
+}
+
+#input-year,
+#input-month,
+#input-companyBankPayment,
+#input-companyCashPayment,
+#input-govermentPayment {
+  margin: 0px 15px;
+  text-indent: 5px;
+  border-radius: 5px;
+  height: 25px;
+}
+
+.btn-submit {
+  border: none;
+  border-radius: 5px;
+
+  margin: 10px 15px;
+  padding: 5px 15px;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  color: white;
+  background-color: cornflowerblue;
+  /* box-shadow: rgba(65, 65, 65, 0.7) 0px 0px 4px 0.1px; */
+
+  transition: all 0.5s ease-in-out 0.01s;
+  transition: box-shadow none;
+  cursor: pointer;
+}
+
+.btn-submit:hover {
+  padding: 5px 15px;
+  background-color: white;
+  color: cornflowerblue;
+  box-shadow: inset rgb(0, 132, 255) 0px 0px 4px 0.3px;
+}
+
+/* ############################################################################ */
+
+/* ############################################################################ */
+/* #############################   Media Queries   ############################ */
+/* ############################################################################ */
+
+@media screen and (max-width: 1878px) {
+  .payments-container {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media screen and (max-width: 1576px) {
+  .payments-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (max-width: 1265px) {
+  .payments-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 955px) {
+  .payments-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 645px) {
+  .payments-container {
+    grid-template-columns: 1fr;
+
+    margin: 0 auto;
+    /* width: 302px; */
+    height: 100%;
+  }
+
+  .add-payment-container {
+    grid-row: span 1;
+
+    border: 1px solid black;
+    /* width: 300px;
+    height: 300px; */
+  }
+}
+
+/* ############################################################################ */
+
+/* ############################################################################ */
+/* #############################   Helper Styles   ############################ */
+/* ############################################################################ */
+
+.vert-line {
+  border-bottom: 1px solid black;
+  margin: 10px 0 5px 0;
+  box-shadow: rgba(17, 60, 235, 0.3) 0px 0px 2px 1px;
+}
+
+/* ############################################################################ */
