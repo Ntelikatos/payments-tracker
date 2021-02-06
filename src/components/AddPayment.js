@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import PaymentModel from '../objectModels/PaymentModel'
 import { EnumMonths } from '../objectModels/PaymentModel'
 
@@ -16,6 +18,26 @@ const AddPayment = ({ onAddPayment }) => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
+
+    if (
+      parseInt(payment.year) === 0 &&
+      parseFloat(payment.companyBankPayment) === 0 &&
+      parseFloat(payment.companyCashPayment) === 0 &&
+      parseFloat(payment.govermentPayment) === 0
+    ) {
+      toast.warn('All values are zero!', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
+
+      return
+    } else {
+    }
 
     onAddPayment(payment)
 
@@ -105,6 +127,7 @@ const AddPayment = ({ onAddPayment }) => {
         onChange={handleOnGovermentPaymentChange}
       />
       <input className='btn-submit' type='submit' value='Add' />
+      <ToastContainer></ToastContainer>
     </form>
   )
 }
