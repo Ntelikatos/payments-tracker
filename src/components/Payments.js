@@ -1,6 +1,5 @@
 import Payment from './Payment'
 import AddPayment from './AddPayment'
-import { useState } from 'react'
 
 const Payments = ({ onAddPayment, payments }) => {
   return (

@@ -1,6 +1,3 @@
-import { useState } from 'react'
-import PaymentModel from '../objectModels/PaymentModel'
-
 const Payment = ({ paymentModel }) => {
   return (
     <div className='payment'>

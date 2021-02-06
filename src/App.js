@@ -51,10 +51,6 @@ function App() {
     new PaymentModel(31, new Date().getFullYear(), 'May', 45.33, 3.56, 123.02),
   ])
 
-  const handleOnClick = () => {
-    console.log(payments)
-  }
-
   const handleOnAddPayment = (payment) => {
     setPayments([...payments, payment])
   }
