@@ -19,29 +19,45 @@ const AddPayment = ({ onAddPayment }) => {
   const handleOnSubmit = (e) => {
     e.preventDefault()
 
+    const checkIfIsNaN = (value) => {
+      if (isNaN(parseFloat(value))) {
+        return true
+      } else {
+        return false
+      }
+    }
+
     if (
       parseInt(payment.year) === 0 &&
       parseFloat(payment.companyBankPayment) === 0 &&
       parseFloat(payment.companyCashPayment) === 0 &&
       parseFloat(payment.govermentPayment) === 0
     ) {
-      toast.warn('All values are zero!', {
-        position: 'top-right',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      })
+      toast.error('All values are zero!')
+
+      return
+    } else if (checkIfIsNaN(payment.year)) {
+      toast.error('Year cant be empty!')
+
+      return
+    } else if (checkIfIsNaN(payment.companyBankPayment)) {
+      toast.error('Company Bank Payment cant be empty!')
+
+      return
+    } else if (checkIfIsNaN(payment.companyCashPayment)) {
+      toast.error('Company Cash Payment cant be empty!')
+
+      return
+    } else if (checkIfIsNaN(payment.govermentPayment)) {
+      toast.error('Goverment Payment cant be empty!')
 
       return
     } else {
+      onAddPayment(payment)
+
+      setPayment({ ...defaultPaymentModel })
+      toast.success('New payment added succesfully!')
     }
-
-    onAddPayment(payment)
-
-    setPayment({ ...defaultPaymentModel })
   }
 
   const handleOnSelectChange = (e) => {
@@ -127,7 +143,17 @@ const AddPayment = ({ onAddPayment }) => {
         onChange={handleOnGovermentPaymentChange}
       />
       <input className='btn-submit' type='submit' value='Add' />
-      <ToastContainer></ToastContainer>
+      <ToastContainer
+        position='top-right'
+        autoClose={2500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      ></ToastContainer>
     </form>
   )
 }
