@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import PaymentModel from '../objectModels/PaymentModel'
 import { EnumMonths } from '../objectModels/PaymentModel'
 
@@ -17,17 +19,45 @@ const AddPayment = ({ onAddPayment }) => {
   const handleOnSubmit = (e) => {
     e.preventDefault()
 
-    if (
-      payment.year === 0 &&
-      payment.companyBankPayment === 0 &&
-      payment.companyCashPayment === 0 &&
-      payment.govermentPayment === 0
-    ) {
+    const checkIfIsNaN = (value) => {
+      if (isNaN(parseFloat(value))) {
+        return true
+      } else {
+        return false
+      }
     }
 
-    onAddPayment(payment)
+    if (
+      parseInt(payment.year) === 0 &&
+      parseFloat(payment.companyBankPayment) === 0 &&
+      parseFloat(payment.companyCashPayment) === 0 &&
+      parseFloat(payment.govermentPayment) === 0
+    ) {
+      toast.error('All values are zero!')
 
-    setPayment({ ...defaultPaymentModel })
+      return
+    } else if (checkIfIsNaN(payment.year)) {
+      toast.error('Year cant be empty!')
+
+      return
+    } else if (checkIfIsNaN(payment.companyBankPayment)) {
+      toast.error('Company Bank Payment cant be empty!')
+
+      return
+    } else if (checkIfIsNaN(payment.companyCashPayment)) {
+      toast.error('Company Cash Payment cant be empty!')
+
+      return
+    } else if (checkIfIsNaN(payment.govermentPayment)) {
+      toast.error('Goverment Payment cant be empty!')
+
+      return
+    } else {
+      onAddPayment(payment)
+
+      setPayment({ ...defaultPaymentModel })
+      toast.success('New payment added succesfully!')
+    }
   }
 
   const handleOnSelectChange = (e) => {
@@ -113,6 +143,17 @@ const AddPayment = ({ onAddPayment }) => {
         onChange={handleOnGovermentPaymentChange}
       />
       <input className='btn-submit' type='submit' value='Add' />
+      <ToastContainer
+        position='top-right'
+        autoClose={2500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      ></ToastContainer>
     </form>
   )
 }
