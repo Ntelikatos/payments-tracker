@@ -1,7 +1,7 @@
-const Payment = ({ paymentModel }) => {
+const Payment = ({ paymentModel, onDelete }) => {
   return (
     <div className='payment'>
-      {/* <h1>{payment.id}</h1> */}
+      {/* <h1>{paymentModel.id}</h1> */}
       <h3>Year: {paymentModel.year}</h3>
       <h3>Month: {paymentModel.month}</h3>
       <h3>Company Bank Payment: {paymentModel.companyBankPayment}</h3>
@@ -16,6 +16,7 @@ const Payment = ({ paymentModel }) => {
           paymentModel.companyCashPayment
         ).toFixed(2)}
       </h3>
+      <a className='btn-delete' onClick={() => onDelete(paymentModel.id)}></a>
     </div>
   )
 }

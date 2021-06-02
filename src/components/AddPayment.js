@@ -17,6 +17,14 @@ const AddPayment = ({ onAddPayment }) => {
   const handleOnSubmit = (e) => {
     e.preventDefault()
 
+    if (
+      payment.year === 0 &&
+      payment.companyBankPayment === 0 &&
+      payment.companyCashPayment === 0 &&
+      payment.govermentPayment === 0
+    ) {
+    }
+
     onAddPayment(payment)
 
     setPayment({ ...defaultPaymentModel })

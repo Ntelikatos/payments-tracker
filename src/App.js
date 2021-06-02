@@ -1,67 +1,67 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import PaymentModel from './objectModels/PaymentModel'
 import Payments from './components/Payments'
+import { db } from './firebase.config'
 
 import './App.css'
 
 function App() {
-  const [payments, setPayments] = useState([
-    new PaymentModel(
-      1,
-      new Date().getFullYear(),
-      'January',
-      24.33,
-      14.56,
-      56.0
-    ),
-    new PaymentModel(
-      2,
-      new Date().getFullYear(),
-      'February',
-      12.43,
-      52.56,
-      131.0
-    ),
-    new PaymentModel(3, new Date().getFullYear(), 'April', 26.72, 47.56, 126.2),
-    new PaymentModel(4, new Date().getFullYear(), 'May', 45.33, 3.56, 123.02),
-    new PaymentModel(5, new Date().getFullYear(), 'May', 45.33, 3.56, 123.02),
-    new PaymentModel(6, new Date().getFullYear(), 'May', 45.33, 3.56, 123.02),
-    new PaymentModel(7, new Date().getFullYear(), 'May', 45.33, 3.56, 123.02),
-    new PaymentModel(8, new Date().getFullYear(), 'May', 45.33, 3.56, 123.02),
-    new PaymentModel(9, new Date().getFullYear(), 'May', 45.33, 3.56, 123.02),
-    new PaymentModel(10, new Date().getFullYear(), 'May', 45.33, 3.56, 123.02),
-    new PaymentModel(12, new Date().getFullYear(), 'May', 45.33, 3.56, 123.02),
-    new PaymentModel(13, new Date().getFullYear(), 'May', 45.33, 3.56, 123.02),
-    new PaymentModel(14, new Date().getFullYear(), 'May', 45.33, 3.56, 123.02),
-    new PaymentModel(15, new Date().getFullYear(), 'May', 45.33, 3.56, 123.02),
-    new PaymentModel(16, new Date().getFullYear(), 'May', 45.33, 3.56, 123.02),
-    new PaymentModel(17, new Date().getFullYear(), 'May', 45.33, 3.56, 123.02),
-    new PaymentModel(18, new Date().getFullYear(), 'May', 45.33, 3.56, 123.02),
-    new PaymentModel(19, new Date().getFullYear(), 'May', 45.33, 3.56, 123.02),
-    new PaymentModel(20, new Date().getFullYear(), 'May', 45.33, 3.56, 123.02),
-    new PaymentModel(21, new Date().getFullYear(), 'May', 45.33, 3.56, 123.02),
-    new PaymentModel(22, new Date().getFullYear(), 'May', 45.33, 3.56, 123.02),
-    new PaymentModel(23, new Date().getFullYear(), 'May', 45.33, 3.56, 123.02),
-    new PaymentModel(24, new Date().getFullYear(), 'May', 45.33, 3.56, 123.02),
-    new PaymentModel(26, new Date().getFullYear(), 'May', 45.33, 3.56, 123.02),
-    new PaymentModel(27, new Date().getFullYear(), 'May', 45.33, 3.56, 123.02),
-    new PaymentModel(28, new Date().getFullYear(), 'May', 45.33, 3.56, 123.02),
-    new PaymentModel(29, new Date().getFullYear(), 'May', 45.33, 3.56, 123.02),
-    new PaymentModel(30, new Date().getFullYear(), 'May', 45.33, 3.56, 123.02),
-    new PaymentModel(31, new Date().getFullYear(), 'May', 45.33, 3.56, 123.02),
-  ])
+  const [payments, setPayments] = useState([])
 
   const handleOnAddPayment = (payment) => {
-    setPayments([...payments, payment])
+    if (addPaymentToFirestore(payment)) {
+      setPayments([...payments, payment])
+    }
   }
+
+  const addPaymentToFirestore = async (payment) => {
+    var newPaymentRef = db.collection('payments').doc()
+
+    return newPaymentRef.set(Object.assign({}, payment)).then((ref) => {
+      if (ref) {
+        console.log('Added document with ID: ', ref.id)
+      }
+    })
+  }
+
+  const removePaymentFromFirebase = async (paymentId) => {
+    var paymentToDeleteRef = db.collection('payments').doc(paymentId.toString())
+
+    console.log(paymentId)
+
+    var result = paymentToDeleteRef
+      .delete()
+      .then(() => console.log('Document ', paymentId, ' deleted!'))
+      .catch((error) =>
+        console.error(`Error deleting document ${paymentId}!`, error)
+      )
+  }
+
+  useEffect(() => {
+    const unsubscribe = db.collection('payments').onSnapshot((snapshot) => {
+      const data = snapshot.docs.map(
+        (doc) =>
+          new PaymentModel(
+            doc.id,
+            doc.data().year,
+            doc.data().month,
+            doc.data().companyBankPayment,
+            doc.data().companyCashPayment,
+            doc.data().govermentPayment
+          )
+      )
+
+      setPayments(data)
+    })
+  }, [])
 
   return (
     <div className='App'>
       <Payments
         onAddPayment={handleOnAddPayment}
+        onDeletePayment={removePaymentFromFirebase}
         payments={payments}
       ></Payments>
-      {/* <button onClick={handleOnClick}>Test</button> */}
     </div>
   )
 }
