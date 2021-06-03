@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import PaymentModel from './objectModels/PaymentModel'
 import Payments from './components/Payments'
 import { db } from './firebase.config'
+import { ToastContainer, toast } from 'react-toastify'
 
 function App() {
   const [payments, setPayments] = useState([])
@@ -29,10 +30,14 @@ function App() {
 
     var result = paymentToDeleteRef
       .delete()
-      .then(() => console.log('Document ', paymentId, ' deleted!'))
-      .catch((error) =>
+      .then(() => {
+        toast.success('Payment deleted successfully!')
+        console.log('Document ', paymentId, ' deleted!')
+      })
+      .catch((error) => {
+        toast.error(`Error deleting document ${paymentId}!`)
         console.error(`Error deleting document ${paymentId}!`, error)
-      )
+      })
   }
 
   useEffect(() => {
@@ -60,6 +65,17 @@ function App() {
         onDeletePayment={removePaymentFromFirebase}
         payments={payments}
       ></Payments>
+      <ToastContainer
+        position='top-right'
+        autoClose={2500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      ></ToastContainer>
     </div>
   )
 }
