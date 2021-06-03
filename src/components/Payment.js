@@ -2,12 +2,25 @@ const Payment = ({ paymentModel, onDelete }) => {
   return (
     <div className='payment'>
       {/* <h1>{paymentModel.id}</h1> */}
-      <h3>Year: {paymentModel.year}</h3>
-      <h3>Month: {paymentModel.month}</h3>
-      <h3>Company Bank Payment: {paymentModel.companyBankPayment}</h3>
-      <h3>Company Cash Payment: {paymentModel.companyCashPayment}</h3>
-      <h3>Goverment Payment: {paymentModel.govermentPayment}</h3>
-      <div className='vert-line'></div>
+      <h3>
+        <span className='text-highlight'>Year:</span> {paymentModel.year}
+      </h3>
+      <h3>
+        <span className='text-highlight'>Month:</span> {paymentModel.month}
+      </h3>
+      <h3>
+        <span className='text-highlight'>Company Bank Payment:</span>{' '}
+        {paymentModel.companyBankPayment}
+      </h3>
+      <h3>
+        <span className='text-highlight'>Company Cash Payment:</span>{' '}
+        {paymentModel.companyCashPayment}
+      </h3>
+      <h3>
+        <span className='text-highlight'>Goverment Payment:</span>{' '}
+        {paymentModel.govermentPayment}
+      </h3>
+      <div className='horizontal-line'></div>
       <h3>
         Total Amount:{' '}
         {(

@@ -4,14 +4,16 @@ import 'react-toastify/dist/ReactToastify.css'
 import PaymentModel from '../objectModels/PaymentModel'
 import { EnumMonths } from '../objectModels/PaymentModel'
 
-const defaultPaymentModel = new PaymentModel(
-  null,
-  new Date().getFullYear(),
-  EnumMonths.January,
-  0.0,
-  0.0,
-  0.0
-)
+// const defaultPaymentModel = new PaymentModel(
+//   null,
+//   new Date().getFullYear(),
+//   EnumMonths.January,
+//   0.0,
+//   0.0,
+//   0.0
+// )
+
+const defaultPaymentModel = new PaymentModel(null, null, null, null, null, null)
 
 const AddPayment = ({ onAddPayment }) => {
   const [payment, setPayment] = useState(defaultPaymentModel)
