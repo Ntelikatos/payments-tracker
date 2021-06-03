@@ -16,7 +16,7 @@ const Payment = ({ paymentModel, onDelete }) => {
           paymentModel.companyCashPayment
         ).toFixed(2)}
       </h3>
-      <a className='btn-delete' onClick={() => onDelete(paymentModel.id)}></a>
+      {/* <a className='btn-delete' onClick={() => onDelete(paymentModel.id)}></a> */}
     </div>
   )
 }

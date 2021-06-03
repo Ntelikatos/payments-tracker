@@ -3,8 +3,6 @@ import PaymentModel from './objectModels/PaymentModel'
 import Payments from './components/Payments'
 import { db } from './firebase.config'
 
-import './App.css'
-
 function App() {
   const [payments, setPayments] = useState([])
 
