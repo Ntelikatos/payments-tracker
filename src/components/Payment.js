@@ -22,7 +22,7 @@ const Payment = ({ paymentModel, onDelete }) => {
       </h3>
       <div className='horizontal-line'></div>
       <h3>
-        Total Amount:{' '}
+        <span className='text-highlight'>Total Amount:</span>{' '}
         {(
           paymentModel.govermentPayment +
           paymentModel.companyBankPayment +
