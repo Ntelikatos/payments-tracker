@@ -22,12 +22,14 @@ const Payment = ({ paymentModel, onDelete }) => {
       </h3>
       <div className='horizontal-line'></div>
       <h3>
-        <span className='text-highlight'>Total Amount:</span>{' '}
-        {(
-          paymentModel.govermentPayment +
-          paymentModel.companyBankPayment +
-          paymentModel.companyCashPayment
-        ).toFixed(2)}
+        <span className='total-text-highlight'>
+          Total Amount:{' '}
+          {(
+            paymentModel.govermentPayment +
+            paymentModel.companyBankPayment +
+            paymentModel.companyCashPayment
+          ).toFixed(2)}
+        </span>
       </h3>
       <a className='btn-delete' onClick={() => onDelete(paymentModel.id)}></a>
     </div>
