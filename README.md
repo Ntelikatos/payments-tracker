@@ -4,7 +4,7 @@ Payments Tracker is a ReactJS SPA which is store/delete payments using firebase 
 
 ## Installation
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install foobar.
+Use the package manager [NPM](https://www.npmjs.com/) to install Payments Tracker.
 
 ```bash
 npm install
