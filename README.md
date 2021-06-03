@@ -2,6 +2,13 @@
 
 Payments Tracker is a ReactJS SPA which is store/delete payments using firebase firestore.
 
+## Hosted
+
+This application is hosted on Netlify using my custom domain.
+You can take a look in https://www.ntelikatos.live.
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/187ebc9a-be8a-4a13-a2ba-55983e8e382d/deploy-status)](https://app.netlify.com/sites/payments-tracker/deploys)
+
 ## Installation
 
 Use the package manager [NPM](https://www.npmjs.com/) to install Payments Tracker.
@@ -21,5 +28,3 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
-
-[![Netlify Status](https://api.netlify.com/api/v1/badges/187ebc9a-be8a-4a13-a2ba-55983e8e382d/deploy-status)](https://app.netlify.com/sites/payments-tracker/deploys)
